@@ -1,8 +1,5 @@
 package com.cargo.controller;
 
-import com.cargo.algorithm.FlatEarthDist;
-import com.cargo.algorithm.Graph;
-import com.cargo.algorithm.Node;
 import com.cargo.model.Users;
 import com.dlsc.gmapsfx.GoogleMapView;
 import com.dlsc.gmapsfx.MapComponentInitializedListener;
@@ -14,7 +11,6 @@ import com.dlsc.gmapsfx.service.geocoding.GeocoderStatus;
 import com.dlsc.gmapsfx.service.geocoding.GeocodingResult;
 import com.dlsc.gmapsfx.service.geocoding.GeocodingService;
 import com.dlsc.gmapsfx.service.geocoding.GeocodingServiceCallback;
-import com.dlsc.gmapsfx.shapes.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,7 +32,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 public class RegisterUserController implements Initializable, MapComponentInitializedListener,
@@ -232,8 +231,7 @@ public class RegisterUserController implements Initializable, MapComponentInitia
         tb.getItems().addAll(btnZoomIn, btnZoomOut,back, mapTypeCombo,
                 new Label("Zoom: "), lblZoom,
                 new Label("Center: "), lblCenter,
-                new Label("Click: "), lblClick,
-				btnHideMarker, btnDeleteMarker);
+                new Label("Click: "), lblClick);
 
         bp.setTop(tb);
 
@@ -241,44 +239,10 @@ public class RegisterUserController implements Initializable, MapComponentInitia
 
 		Stage stage2 = new Stage();
 
-		Scene scene = new Scene(bp);
+		Scene scene = new Scene(bp,1500,700);
 		stage2.setScene(scene);
-		stage2.setTitle("User Login Page");
+		stage2.setTitle("Kullanıcı Harita Sayfası");
 		stage2.show();
-
-		/*
-		Node nodeA = new Node("A");
-		Node nodeB = new Node("B");
-		Node nodeC = new Node("C");
-		Node nodeD = new Node("D");
-		Node nodeE = new Node("E");
-		Node nodeF = new Node("F");
-
-		nodeA.addDestination(nodeB, FlatEarthDist.distance(user.lat,user.lng,target.lat,target.lng));
-		nodeA.addDestination(nodeC, 15);
-
-		nodeB.addDestination(nodeD, 12);
-		nodeB.addDestination(nodeF, 15);
-
-		nodeC.addDestination(nodeE, 10);
-
-		nodeD.addDestination(nodeE, 2);
-		nodeD.addDestination(nodeF, 1);
-
-		nodeF.addDestination(nodeE, 5);
-
-		Graph graph = new Graph();
-
-		graph.addNode(nodeA);
-		graph.addNode(nodeB);
-		graph.addNode(nodeC);
-		graph.addNode(nodeD);
-		graph.addNode(nodeE);
-		graph.addNode(nodeF);
-
-		graph = Dijkstra.calculateShortestPathFromSource(graph, nodeA);
-
-		 */
 	}
 
     @FXML 

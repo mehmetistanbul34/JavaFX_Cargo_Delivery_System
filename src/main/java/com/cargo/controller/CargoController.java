@@ -1,8 +1,6 @@
 package com.cargo.controller;
 
-import com.cargo.algorithm.Dijkstra;
 import com.cargo.algorithm.FlatEarthDist;
-import com.cargo.algorithm.Graph;
 import com.cargo.algorithm.Node;
 import com.cargo.model.Cargo;
 import com.cargo.model.LatLon;
@@ -17,7 +15,8 @@ import com.dlsc.gmapsfx.service.geocoding.GeocoderStatus;
 import com.dlsc.gmapsfx.service.geocoding.GeocodingResult;
 import com.dlsc.gmapsfx.service.geocoding.GeocodingService;
 import com.dlsc.gmapsfx.service.geocoding.GeocodingServiceCallback;
-import com.dlsc.gmapsfx.shapes.*;
+import com.dlsc.gmapsfx.shapes.Polyline;
+import com.dlsc.gmapsfx.shapes.PolylineOptions;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -40,7 +39,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class CargoController implements Initializable, MapComponentInitializedListener,
@@ -642,104 +640,8 @@ Node nodeF = new Node("F");*/
 			}
 		}
 
-/*nodeA.addDestination(nodeB, 10);//FlatEarthDist.distance(user.lat,user.lng,target.lat,target.lng));
-nodeA.addDestination(nodeC, 15);
-
-nodeB.addDestination(nodeD, 12);
-nodeB.addDestination(nodeF, 15);
-
-nodeC.addDestination(nodeE, 10);
-
-nodeD.addDestination(nodeE, 2);
-nodeD.addDestination(nodeF, 1);
-
-nodeF.addDestination(nodeE, 5);
-
-
-
-		Graph graph = new Graph();
-
-		for (int i=0;i<idList.size()+1;i++){
-			graph.addNode(nodeList.get(i));
-		}
-graph.addNode(nodeA);
-graph.addNode(nodeB);
-graph.addNode(nodeC);
-graph.addNode(nodeD);
-graph.addNode(nodeE);
-graph.addNode(nodeF);
-
-		graph = Dijkstra.calculateShortestPathFromSource(graph, nodeKurye);
-
-		List<LatLong> siraliList = new ArrayList<>();
-
-		System.out.println("graphSize : "+graph.getNodes().size());
-
-		Iterator<Node> iterator = graph.getNodes().stream().iterator();
-
-		List<Node> listNode = new ArrayList<>();
-		while(iterator.hasNext()){
-			System.out.println("itertor---");
-			Node node = iterator.next();
-			listNode.add(node);
-
-			System.out.println("*****"+node.toString());
-		}
-
-List<Node> listNode = nodeKurye.getShortestPath();
-
-
-		LatLong poly10 = new LatLong(kurye.getLatitude()-10, kurye.getLongitude()-10);
-		LatLong poly20 = new LatLong(kurye.getLatitude()-15, kurye.getLongitude()-25);
-		map.setCenter(kurye);
-		LatLong[] ary0 = new LatLong[2];
-		for (int i=0;i<listNode.size()-1;i++){
-			ary0[0] = new LatLong(listNode.get(i).getLatLng().getLatitude(),listNode.get(i).getLatLng().getLongitude());
-			ary0[1] = new LatLong(listNode.get(i+1).getLatLng().getLatitude(),listNode.get(i+1).getLatLng().getLongitude());
-			MVCArray mvc0 = new MVCArray(ary0);
-
-			Random random = new Random(System.currentTimeMillis());
-			int r1 = random.nextInt(9);
-			int r2 = random.nextInt(9);
-			int g1 = random.nextInt(9);
-			int g2 = random.nextInt(9);
-			int b1 = random.nextInt(9);
-			int b2 = random.nextInt(9);
-			if(i!=0) {
-				PolylineOptions polyOpts0 = new PolylineOptions()
-						.path(mvc0)
-						.strokeColor("#" + r1 + "" + r2 + "" + g1 + "" + g2 + "" + b1 + "" + b2)
-						.strokeWeight(i + 1)
-						.zIndex(1)
-						.visible(true);
-
-				Polyline poly0 = new Polyline(polyOpts0);
-				poly0.setEditable(false);
-				map.addMapShape(poly0);
-			}
-			else{
-				PolylineOptions polyOpts0 = new PolylineOptions()
-						.path(mvc0)
-						.strokeColor("red")
-						.strokeWeight(15)
-						.zIndex(1)
-						.visible(true);
-
-				Polyline poly0 = new Polyline(polyOpts0);
-				poly0.setEditable(false);
-				map.addMapShape(poly0);
-			}
-		}
-
-
-
-		list.stream().filter(i->i.getLatitude()!=null && i.getLatitude()!=null).forEach(item-> System.out.println("lat: "+item.getLatitude()+", lot: "+item.getLongitude()));
-
-
-*/
 
 		System.out.println("END MAP INITIALIZED");
-
 	}
 
 	@Override
@@ -755,11 +657,7 @@ List<Node> listNode = nodeKurye.getShortestPath();
 			//gs.reverseGeocode(e.getRoutes().get(0).getLegs().get(0).getStartLocation().getLatitude(), e.getRoutes().get(0).getLegs().get(0).getStartLocation().getLongitude(), this);
 			System.out.println("LEGS SIZE: " + e.getRoutes().get(0).getLegs().size());
 			System.out.println("WAYPOINTS " +e.getGeocodedWaypoints().size());
-            /*double d = 0;
-            for(DirectionsLeg g : e.getRoutes().get(0).getLegs()){
-                d += g.getDistance().getValue();
-                System.out.println("DISTANCE " + g.getDistance().getValue());
-            }*/
+
 			try{
 				System.out.println("Distancia total = " + e.getRoutes().get(0).getLegs().get(0).getDistance().getText());
 			} catch(Exception ex){
@@ -767,17 +665,7 @@ List<Node> listNode = nodeKurye.getShortestPath();
 			}
 			System.out.println("LEG(0)");
 			System.out.println(e.getRoutes().get(0).getLegs().get(0).getSteps().size());
-            /*for(DirectionsSteps ds : e.getRoutes().get(0).getLegs().get(0).getSteps()){
-                System.out.println(ds.getStartLocation().toString() + " x " + ds.getEndLocation().toString());
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(ds.getStartLocation())
-                        .title(ds.getInstructions())
-                        .animation(Animation.DROP)
-                        .visible(true);
-                Marker myMarker = new Marker(markerOptions);
-                map.addMarker(myMarker);
-            }
-                    */
+
 			System.out.println(renderer.toString());
 		}
 	}
