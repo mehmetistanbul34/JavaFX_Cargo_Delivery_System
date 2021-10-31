@@ -409,7 +409,7 @@ public class RegisterUserController implements Initializable, MapComponentInitia
 		map.addUIEventHandler(pinMarker, UIEventType.click, (JSObject obj) -> {
 			InfoWindowOptions infoOptions1 = new InfoWindowOptions();
 			MarkerOptions markerOptions1 = new MarkerOptions();
-			LatLong lll = new LatLong(users.getLatitude()+10,users.getLongitude());
+			LatLong lll = new LatLong(users.getLatitude()+7.5,users.getLongitude());
 			markerOptions1.position(lll)
 					.visible(true);
 			Marker mm = new Marker(markerOptions1);

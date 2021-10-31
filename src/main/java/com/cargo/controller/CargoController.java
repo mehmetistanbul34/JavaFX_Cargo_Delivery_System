@@ -294,7 +294,7 @@ public class CargoController implements Initializable, MapComponentInitializedLi
 		map.addUIEventHandler(pinMarker, UIEventType.click, (JSObject obj) -> {
 			InfoWindowOptions infoOptions1 = new InfoWindowOptions();
 			MarkerOptions markerOptions1 = new MarkerOptions();
-			LatLong lll = new LatLong(item.get(0).getLatitude()+10,item.get(0).getLongitude());
+			LatLong lll = new LatLong(item.get(0).getLatitude()+7.5,item.get(0).getLongitude());
 			markerOptions1.position(lll)
 					.visible(true);
 			Marker mm = new Marker(markerOptions1);
