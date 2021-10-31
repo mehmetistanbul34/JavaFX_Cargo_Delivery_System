@@ -337,7 +337,7 @@ public class RegisterUserController implements Initializable, MapComponentInitia
     public Connection getConnection() {
     	Connection conn;
     	try {
-    		conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cargo_db","postgres","1111");
+    		conn = DriverManager.getConnection("jdbc:postgresql://34.125.191.31:9753/cargo_db","postgres","postgres");
     		return conn;
     	}
     	catch (Exception e){
