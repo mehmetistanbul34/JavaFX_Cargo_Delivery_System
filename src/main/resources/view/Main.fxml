@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cargo.controller.MainController">
+   <children>
+      <HBox layoutX="65.0" layoutY="30.0" spacing="20.0">
+         <children>
+            <Button fx:id="LoginButton" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="120.0" text="Login Page" />
+            <Button fx:id="RegisterButton" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="120.0" text="Register Page" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
